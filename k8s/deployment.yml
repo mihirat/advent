@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: go-server
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: go-server
+        tier: backend
+    spec:
+      containers:
+      - name: go-server
+        image: somewhere/go-server
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        imagePullPolicy: Always
+      - name: nginx
+        image: /nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+          name: http
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            # Path to probe; should be cheap, but representative of typical behavior
+            path: /readiness.html
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
