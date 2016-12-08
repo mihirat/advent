@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: go-server
+  name: web-server
 spec:
   replicas: 2
   strategy:
@@ -9,7 +9,7 @@ spec:
   template:
     metadata:
       labels:
-        name: go-server
+        name: web-server
         tier: backend
     spec:
       containers:
