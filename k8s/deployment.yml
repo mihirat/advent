@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
       - name: go-server
-        image: somewhere/go-server
+        image: techeten/go-server
         ports:
         - containerPort: 8080
           protocol: TCP
         imagePullPolicy: Always
       - name: nginx
-        image: /nginx
+        image: techeten/nginx
         ports:
         - containerPort: 80
           protocol: TCP
